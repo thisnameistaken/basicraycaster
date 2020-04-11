@@ -36,6 +36,7 @@ void drawrays(int mapX, int mapY, int MAPPOWER, int MAPSIZE, int mapin[],  float
     }
 
     for(r = 0; r<120; r++){ // main for loop to draw a ray
+        int flag2 = 0;
         //----------------
         //horizontal check
         //----------------
@@ -121,6 +122,13 @@ void drawrays(int mapX, int mapY, int MAPPOWER, int MAPSIZE, int mapin[],  float
                 disV=dist(px,py,vx,vy,ra);
                 dof = 8; //wall in map
             }
+            else if(mp > 0 && mp < mapX*mapY && mapin[mp] == 2){
+                flag2 = 1;
+                vx = rx;
+                vy = ry;
+                disV=dist(px,py,vx,vy,ra);
+                dof = 8; //wall in map
+            }
             else{
                 rx += xo;
                 ry += yo; // next 
@@ -131,13 +139,16 @@ void drawrays(int mapX, int mapY, int MAPPOWER, int MAPSIZE, int mapin[],  float
             rx = hx;
             ry = hy;
             distfin = disH;
-            glColor3f(.9,0,0);
+            glColor3f(0,0,.9);
         }
         else{
             rx = vx;
             ry = vy;
             distfin = disV;
-            glColor3f(.6,0,0);
+            glColor3f(0,0,.5);
+        }
+        if (flag2 ==1){
+            glColor3f(0,1,0);
         }
         //glColor3f(1,0,0);
         /*glLineWidth(1);
@@ -169,6 +180,7 @@ void drawrays(int mapX, int mapY, int MAPPOWER, int MAPSIZE, int mapin[],  float
         glVertex2i(r*5 +256, lineO);
         glVertex2i(r*5 +256, lineH+lineO);
         glEnd();
+        //drawgun(r);
         //-----------------
         //end draw 3d walls
         //-----------------
@@ -182,4 +194,14 @@ void drawrays(int mapX, int mapY, int MAPPOWER, int MAPSIZE, int mapin[],  float
         }
 
     }
+}
+
+void drawgun(int r){
+    glColor3f(0,0,0);
+    glBegin(GL_POLYGON);
+	glVertex2f(r*5 +500,30);
+	glVertex2f(r*5 +500,10);
+	glVertex2f(r*5 +505,30);
+	glVertex2f(r*5 +505,10);
+    glEnd();
 }
