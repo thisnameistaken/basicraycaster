@@ -27,7 +27,7 @@ void drawrays(int mapX, int mapY, int MAPPOWER, int MAPSIZE, int mapin[],  float
     float rx, ry, ra, xo,yo;
 
     dof_max = maxint(mapX, mapY); 
-    ra = pa - DR*40; 
+    ra = pa - DR*30; 
     if(ra <0){
         ra+=2*PI;
     }
@@ -35,11 +35,11 @@ void drawrays(int mapX, int mapY, int MAPPOWER, int MAPSIZE, int mapin[],  float
         ra-=2*PI;
     }
 
-    for(r = 0; r<80; r++){ // main for loop to draw a ray
+    for(r = 0; r<120; r++){ // main for loop to draw a ray
         //----------------
         //horizontal check
         //----------------
-        float disH = 100000; 
+        float disH = 1000000; 
         float hx = px; 
         float hy = py;
         dof = 0;
@@ -89,7 +89,7 @@ void drawrays(int mapX, int mapY, int MAPPOWER, int MAPSIZE, int mapin[],  float
         //----------------
         //Vertical   check
         //----------------
-        float disV = 100000; 
+        float disV = 1000000; 
         float vx = px; 
         float vy = py;
         dof = 0;
@@ -146,6 +146,7 @@ void drawrays(int mapX, int mapY, int MAPPOWER, int MAPSIZE, int mapin[],  float
         glVertex2i(rx,ry);
         glEnd();*/
 
+        
         //-------------------
         //start draw 3d walls
         //-------------------
@@ -163,7 +164,7 @@ void drawrays(int mapX, int mapY, int MAPPOWER, int MAPSIZE, int mapin[],  float
         }
         float lineO = 250 - lineH/2;
         
-        glLineWidth(200); //walls made of 8 with lines
+        glLineWidth(400); //walls made of x with lines
         glBegin(GL_LINES);
         glVertex2i(r*5 +256, lineO);
         glVertex2i(r*5 +256, lineH+lineO);
@@ -171,8 +172,8 @@ void drawrays(int mapX, int mapY, int MAPPOWER, int MAPSIZE, int mapin[],  float
         //-----------------
         //end draw 3d walls
         //-----------------
-
-        ra += DR; 
+        
+        ra += DR/2; 
         if(ra <0){
             ra+=2*PI;
         }

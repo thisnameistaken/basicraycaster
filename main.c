@@ -41,6 +41,8 @@ int map1[]= {
     1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 
 };
+int mapplayerx1 = 300;
+int mapplayery1 = 300;
 
 void drawplayer(){
 	glColor3f(0,0,1);
@@ -79,6 +81,7 @@ void init(){
 }
 
 void keypressed(unsigned char key, int x, int y){
+    int loc = (int)(px +mapY1*py);
     if(key == 'k'){
         pa -= .1;
         if(pa<0){
@@ -87,7 +90,7 @@ void keypressed(unsigned char key, int x, int y){
         pdx = cos(pa) *5;
         pdy = sin(pa) * 5;
     }
-    if(key == 'l'){
+    if(key == 'l' ){
         pa += .1;
         if(pa > 2*PI){
             pa -= 2 * PI; 
@@ -96,26 +99,48 @@ void keypressed(unsigned char key, int x, int y){
         pdy = sin(pa) * 5;
     }
     
-    if(key == 'a'){
-        px -= 2*pdy;
-        py -= 2*pdx;
+    if(key == 'a' ){
+        if(map1[loc] != 0){
+            px -= 0;
+            py -= 0;
+        }
+        else{
+            px -= 2*pdy;
+            py -= 2*pdx;
+        }
         
     }
-    if(key == 'd'){
-        px += 2*pdy;
-        py += 2*pdx;
-        
+    if(key == 'd' ){
+        if(map1[loc] != 0){
+            px -= 0;
+            py -= 0;
+        }
+        else{
+            px += 2*pdy;
+            py += 2*pdx;
+        }
         
     }
-    if(key == 's'){
-        px -= 2*pdx;
-        py -= 2*pdy;
+    if(key == 's' ){
+        if(map1[loc] != 0){
+            px -= 0;
+            py -= 0;
+        }
 
+        else{
+            px -= 2*pdx;
+            py -= 2*pdy;
+        }
     }
     if(key == 'w'){
-        
+        if(map1[loc] != 0){
+            px -= 0;
+            py -= 0;
+        }
+        else{
         px += 2*pdx;
         py += 2*pdy;
+        }
     }
 
     glutPostRedisplay();
@@ -128,7 +153,7 @@ int main(int argc, char** argv){
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowSize(1920,1080);
-	glutCreateWindow("");
+	glutCreateWindow("bruh bruh bruh moment");
 	init();
 	glutDisplayFunc(display);
     glutKeyboardFunc(keypressed);
